@@ -1,18 +1,15 @@
-data class FizzBuzz(
+class FizzBuzz(
         private val number: Int
 ) {
-    fun value(): String {
-        if (number.isDivisibleBy(3, 5)) {
-            return "FizzBuzz"
-        }
-        if (number.isDivisibleBy(5)) {
-            return "Buzz"
-        }
-        if (number.isDivisibleBy(3)) {
-            return "Fizz"
-        }
-        return number.toString()
-    }
+
+    private val rules: List<Rule> = listOf(
+            Rule({number -> number.isDivisibleBy(3, 5)}, "FizzBuzz"),
+            Rule({number -> number.isDivisibleBy(3)}, "Fizz"),
+            Rule({number -> number.isDivisibleBy(5)}, "Buzz"))
+
+    fun value(): String =
+        rules.filter { rule -> rule.apply(number) }.map { rule -> rule.result }.firstOrNull() ?: number.toString()
+
 }
 
 private fun Int.isDivisibleBy(vararg numbers: Int): Boolean = numbers.all { isDivisibleBy(it) }
