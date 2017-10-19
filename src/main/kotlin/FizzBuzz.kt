@@ -2,7 +2,7 @@ data class FizzBuzz(
         private val number: Int
 ) {
     fun value(): String {
-        if (number.isDivisibleBy(3) && number.isDivisibleBy(5)) {
+        if (number.isDivisibleBy(3, 5)) {
             return "FizzBuzz"
         }
         if (number.isDivisibleBy(5)) {
@@ -15,6 +15,6 @@ data class FizzBuzz(
     }
 }
 
-private fun Int.isDivisibleBy(number: Int): Boolean {
-    return this.rem(number) == 0
-}
+private fun Int.isDivisibleBy(vararg numbers: Int): Boolean = numbers.all { isDivisibleBy(it) }
+
+private fun Int.isDivisibleBy(number: Int) = this.rem(number) == 0
