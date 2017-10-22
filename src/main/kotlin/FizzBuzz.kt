@@ -7,8 +7,7 @@ class FizzBuzz(
             Rule({number -> number.isDivisibleBy(3)}, "Fizz"),
             Rule({number -> number.isDivisibleBy(5)}, "Buzz"))
 
-    fun value(): String =
-        rules.filter { rule -> rule.apply(number) }.map { rule -> rule.result }.firstOrNull() ?: number.toString()
+    fun value(): String =  rules.firstOrNull { rule -> rule.applyFor(number) }?.result ?: number.toString()
 
 }
 

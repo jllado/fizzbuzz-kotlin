@@ -3,7 +3,7 @@ data class Rule(
         val result: String
 ) {
 
-    fun apply(number: Int): Boolean {
+    fun applyFor(number: Int): Boolean {
         return condition.invoke(number)
     }
 
